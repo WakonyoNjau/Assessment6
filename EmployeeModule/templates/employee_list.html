@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee List</title>
+</head>
+<body>
+<h2>This is the records stored or saved about the company's employees data </h2>
+<table border="2" bgcolor="#deb887" cellpadding="5px">
+    <thead>
+    <tr>
+        <td>Full Name</td>
+        <td>Mobile_nu</td>
+        <td>Position</td>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for employee in employee_list %}
+        <tr>
+            <td>{{employee.fullname}}</td>
+            <td>{{employee.mobile_no}}</td>
+            <td>{{employee.position}}</td>
+        </tr>
+
+
+
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+</body>
+</html>
