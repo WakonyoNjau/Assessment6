@@ -6,12 +6,22 @@ from EmployeeModule.models import Employee
 
 
 # Create your views here.
-def employee_form(request):
+def employee_form(request, id=0):
     if request.method == 'GET':
-        form = EmployeeForm()
+        if id == 0:
+            form = EmployeeForm()
+
+        else:
+            employee = Employee.objects.get(pk=id)
+            form = EmployeeForm(instance=employee)
         return render(request, 'employee_form.html', {'form': form})
     else:
-        form = EmployeeForm(request.POST)
+        if id == 0:
+            form = EmployeeForm(request.POST)
+        else:
+            employee = Employee.objects.get(pk=id)
+            form = EmployeeForm(request.POST, instance=employee)
+
         if form.is_valid():
             form.save()
             return redirect('/employee/employee_list/')
@@ -20,7 +30,7 @@ def employee_form(request):
 
 def employee_list(request):
     context = {'employee_list': Employee.objects.all()}
-    return render(request, 'employee_list.html', context)
+    return render(request, 'employee_list.html', context=context)
 
 def registration_form(request):
     if request.method == 'GET':
@@ -47,6 +57,10 @@ def next_of_kin(request):
             messages.success(request, 'Registered Successfully!')
             return redirect('next_of_kin')
 
+def employee_delete(request, id):
+    employee = Employee.objects.get(pk=id)
+    employee.delete()
+    return redirect('/employee/employee_list/')
 
 
 

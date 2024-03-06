@@ -6,12 +6,14 @@
 </head>
 <body>
 <h2>This is the records stored or saved about the company's employees data </h2>
-<table border="2" bgcolor="#deb887" cellpadding="5px">
+<a href="{% url 'employee_form' %}"><button style="border: 5px; background-color: blanchedalmond">ADD NEW EMPLOYEE</button></a>
+<table border="6" bgcolor="#deb887" cellpadding="10px" align="center">
     <thead>
     <tr>
         <td>Full Name</td>
         <td>Mobile_nu</td>
         <td>Position</td>
+        <td></td>
 
     </tr>
     </thead>
@@ -21,8 +23,11 @@
             <td>{{employee.fullname}}</td>
             <td>{{employee.mobile_no}}</td>
             <td>{{employee.position}}</td>
+            <td>
+                <a href="{% url 'employee_update' employee.id %}"><button>UPDATE</button></a>
+                <a href="{% url 'employee_delete' employee.id %}"><button>DELETE</button></a>
+            </td>
         </tr>
-
 
 
     {% endfor %}
